@@ -1,0 +1,1282 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "User API",
+		"version": "1.0.0",
+		"description": "API for user management"
+	},
+	"tags": [
+		{
+			"name": "users",
+			"description": "endpoints that handles user"
+		},
+		{
+			"name": "user-pokemons",
+			"description": "endpoints that handles user pokemons"
+		},
+		{
+			"name": "pokemon",
+			"description": "endpoints that handle pokemons"
+		},
+		{
+			"name": "healthcheck",
+			"description": "healthcheck"
+		}
+	],
+	"servers": [
+		{
+			"url": "http://localhost:3003/"
+		}
+	],
+	"paths": {
+		"/health": {
+			"get": {
+				"summary": "Verify the application health",
+				"tags": [
+					"healthcheck"
+				],
+				"responses": {
+					"200": {
+						"description": "The API is working",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "string",
+									"example": "OK"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users": {
+			"post": {
+				"summary": "Create a new user",
+				"description": "Creates a new user with username and age",
+				"tags": [
+					"users"
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateUserRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "User created successfully",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateUserResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"invalid username": {
+										"summary": "Invalid username",
+										"value": {
+											"message": "Invalid username. It must be a string, but received type: undefined"
+										}
+									},
+									"username already exists": {
+										"summary": "username already exists",
+										"value": {
+											"message": "ApiError: Invalid username. Username already exists"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"patch": {
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"summary": "Edit user data",
+				"description": "Allows editing of specific properties of an existing user.",
+				"tags": [
+					"users"
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/EditUserRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successfully updated user",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EditUserResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request",
+						"content": {
+							"application/json": {
+								"examples": {
+									"InvalidPokemonId": {
+										"summary": "PokemonId is no valid",
+										"value": {
+											"message": "Invalid pokemon_id. It must be a number, but received type: string"
+										}
+									},
+									"NoAuthHeader": {
+										"summary": "Authorization header not provided",
+										"value": {
+											"message": "Authorization header must be provided"
+										}
+									},
+									"InvalidAuthToken": {
+										"summary": "Invalid Auth Token",
+										"value": {
+											"message": "Invalid auth token"
+										}
+									}
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "unauthorized",
+						"content": {
+							"application/json": {
+								"examples": {
+									"NoAuthHeader": {
+										"summary": "Authorization header not provided",
+										"value": {
+											"message": "Authorization header must be provided"
+										}
+									},
+									"InvalidAuthToken": {
+										"summary": "Invalid Auth Token",
+										"value": {
+											"message": "Invalid auth token"
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "User not found",
+						"content": {
+							"application/json": {
+								"example": {
+									"message": "ApiError: invalid userId. Cannot find a user with userId: 66f9c020845f2fbe86dcd4b0"
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/pokemons": {
+			"post": {
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"summary": "Append a new Pokemon to user's Pokemon list",
+				"description": "Adds a new Pokemon to the user's list of Pokemons.",
+				"tags": [
+					"user-pokemons"
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserPokemonUpdateRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Pokemon successfully appended",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SafeUser"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request due to invalid input",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"InvalidPokemonId": {
+										"summary": "Invalid Pokemon ID",
+										"value": {
+											"message": "Invalid pokemon_id. It must be a number, but received type: string"
+										}
+									},
+									"InvalidName": {
+										"summary": "Invalid Pokemon name",
+										"value": {
+											"message": "Invalid name. It must not be empty, but received: "
+										}
+									},
+									"NoAuthHeader": {
+										"summary": "Authorization header not provided",
+										"value": {
+											"message": "Authorization header must be provided"
+										}
+									},
+									"InvalidAuthToken": {
+										"summary": "Invalid Auth Token",
+										"value": {
+											"message": "Invalid auth token"
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "User not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"UserNotFound": {
+										"summary": "User does not exist",
+										"value": {
+											"message": "ApiError: invalid userId. Cannot find a user with userId: 66f9c020845f2fbe86dcd4b0"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"summary": "Show a user's Pokemons",
+				"description": "Fetches a user's list of Pokemons, either from cache or the database if no cache is available.",
+				"tags": [
+					"user-pokemons"
+				],
+				"responses": {
+					"200": {
+						"description": "Successfully fetched user's Pokemons",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Pokemon"
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"NoAuthHeader": {
+										"summary": "Authorization header not provided",
+										"value": {
+											"message": "Authorization header must be provided"
+										}
+									},
+									"InvalidAuthToken": {
+										"summary": "Invalid Auth Token",
+										"value": {
+											"message": "Invalid auth token"
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "User not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"UserNotFound": {
+										"summary": "User does not exist",
+										"value": {
+											"message": "ApiError: Cannot find an user with provided userId: 66d631125ce925f54be34549"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Invalid userId format",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"InvalidUserId": {
+										"summary": "Invalid userId format",
+										"value": {
+											"message": "Unexpected unknown error. Cannot process request"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/pokemons/{pokemonId}": {
+			"delete": {
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"summary": "Remove a Pokemon from a user's list",
+				"description": "Removes a Pokemon from a user's list given a valid userId from token and pokemonId.",
+				"tags": [
+					"user-pokemons"
+				],
+				"parameters": [
+					{
+						"name": "pokemonId",
+						"in": "path",
+						"required": true,
+						"description": "ID of the Pokemon to remove",
+						"schema": {
+							"type": "integer",
+							"example": 1
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successfully removed Pokemon from the user's list",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"removedPokemonId": {
+											"type": "integer",
+											"description": "ID of the removed Pokemon",
+											"example": 1
+										}
+									}
+								},
+								"example": {
+									"removedPokemonId": 1
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Pokemon ID",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"InvalidPokemonId": {
+										"summary": "Invalid Pokemon ID",
+										"value": {
+											"message": "Invalid pokemon_id. It must be a number greater than 0, but received: 0"
+										}
+									},
+									"NoAuthHeader": {
+										"summary": "Authorization header not provided",
+										"value": {
+											"message": "Authorization header must be provided"
+										}
+									},
+									"InvalidAuthToken": {
+										"summary": "Invalid Auth Token",
+										"value": {
+											"message": "Invalid auth token"
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "User or Pokemon not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"UserNotFound": {
+										"summary": "User does not exist",
+										"value": {
+											"message": "ApiError: Cannot find an user with provided userId: 66d62088031a2073b50d6d67"
+										}
+									},
+									"PokemonNotFound": {
+										"summary": "Pokemon not found in user's list",
+										"value": {
+											"message": "ApiError: Cannot find a pokemon with provided pokemonId: 25 in the user 66d62088031a2073b50d6d66"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Invalid userId format",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"InvalidUserId": {
+										"summary": "Invalid userId format",
+										"value": {
+											"message": "Unexpected unknown error. Cannot process request"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/password": {
+			"patch": {
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"tags": [
+					"users"
+				],
+				"summary": "Edit user password",
+				"description": "Edits the password of a user. Requires the current password and a new valid password.",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"currentPassword": {
+										"type": "string",
+										"description": "The current password of the user.",
+										"example": "currentPassword123"
+									},
+									"newPassword": {
+										"type": "string",
+										"description": "The new password the user wants to set.",
+										"example": "newPassword123"
+									}
+								},
+								"required": [
+									"currentPassword",
+									"newPassword"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Password successfully changed.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ChangePasswordResponse"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid request or incorrect current password.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"incorrectPassword": {
+										"summary": "Incorrect current password",
+										"value": {
+											"message": "ApiError: Failed to change user password"
+										}
+									},
+									"invalidNewPassword": {
+										"summary": "Invalid new password",
+										"value": {
+											"message": "Invalid user password. It must not be empty, but received: "
+										}
+									},
+									"NoAuthHeader": {
+										"summary": "Authorization header not provided",
+										"value": {
+											"message": "Authorization header must be provided"
+										}
+									},
+									"InvalidAuthToken": {
+										"summary": "Invalid Auth Token",
+										"value": {
+											"message": "Invalid auth token"
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "User not found",
+						"content": {
+							"application/json": {
+								"example": {
+									"message": "ApiError: invalid userId. Cannot find a user with userId: 66f9c020845f2fbe86dcd4b0"
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/token/refresh": {
+			"post": {
+				"tags": [
+					"users"
+				],
+				"summary": "Refresh Access Token",
+				"description": "Generates a new access token using an expired token and refresh token. Requires a valid JWT expired token.",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"expiredToken": {
+										"type": "string",
+										"description": "The expired JWT token that needs to be refreshed.",
+										"example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcklkIjoiNjZkNjIwODgwMzFhMjA3M2I1MGQ2ZDY2IiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.QT83p4Oy16ZYXxKR3b8aye-aI4apfSMq_d3IyR8MZX4"
+									},
+									"refreshToken": {
+										"type": "string",
+										"description": "The expired JWT token that needs to be refreshed.",
+										"example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzNmODA1MzA0ZTAwNTg3OGZkOWNiOWEiLCJpYXQiOjE3MzIyMTQ4NjcsImV4cCI6MTc0Nzc2Njg2N30.mB2T8iyafQsNODVSXb80L8klJSwUYWiVWnC-OYhtoyM"
+									}
+								},
+								"required": [
+									"expiredToken",
+									"refreshToken"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successfully generated a new access token.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NewAccessTokenResponse"
+								},
+								"examples": {
+									"success": {
+										"summary": "Success response",
+										"value": {
+											"newAccessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcklkIjoiNjZkNjIwODgwMzFhMjA3M2I1MGQ2ZDY2IiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.QT83p4Oy16ZYXxKR3b8aye-aI4apfSMq_d3IyR8MZX4"
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Token do not mach any user or refresh token for user do not exists",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"nonExistentRefreshToken": {
+										"summary": "Refresh token for user does not exist",
+										"value": {
+											"message": "ApiError: Cannot generate new accessToken because a refreshToken for user [hdedwbjniasdnqwjdiwewdwe] does not exists"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/login": {
+			"post": {
+				"tags": [
+					"users"
+				],
+				"summary": "User Login",
+				"description": "Logs in a user with valid credentials and returns a new JWT access token.",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"username": {
+										"type": "string",
+										"description": "The username of the user.",
+										"example": "JohnDoe"
+									},
+									"password": {
+										"type": "string",
+										"description": "The password of the user.",
+										"example": "password123"
+									}
+								},
+								"required": [
+									"username",
+									"password"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "User successfully logged in, and a new JWT access token is returned.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/LoginResponse"
+								},
+								"examples": {
+									"success": {
+										"summary": "Successful login",
+										"value": {
+											"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcklkIjoiNjZkNjIwODgwMzFhMjA3M2I1MGQ2ZDY2IiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.QT83p4Oy16ZYXxKR3b8aye-aI4apfSMq_d3IyR8MZX4",
+											"refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzNmODEyZDA0ZTAwNTg3OGZkOWNiOWUiLCJpYXQiOjE3MzIyMTUyNjQsImV4cCI6MTc0Nzc2NzI2NH0.NHEsIarSP2ZoWkGT-HyuNRp8-VcjDU_QIwKDlm9vbC8"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid login credentials or input.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"invalidUsernameLength0": {
+										"summary": "Invalid username with length 0",
+										"value": {
+											"message": "Invalid username. It must have at least 2 of length, but received length: 0"
+										}
+									},
+									"invalidUsernameLength1": {
+										"summary": "Invalid username with length 1",
+										"value": {
+											"message": "Invalid username. It must have at least 2 of length, but received length: 1"
+										}
+									},
+									"nonExistentUser": {
+										"summary": "Username does not exist",
+										"value": {
+											"message": "ApiError: Invalid username or password"
+										}
+									},
+									"invalidPassword": {
+										"summary": "Invalid password for a valid user",
+										"value": {
+											"message": "ApiError: Invalid username or password"
+										}
+									},
+									"emptyPassword": {
+										"summary": "Password is empty",
+										"value": {
+											"message": "Invalid user password. It must not be empty, but received: "
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/pokemons/{pokemon_id}": {
+			"get": {
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"summary": "Obter detalhes de um Pokémon por ID",
+				"parameters": [
+					{
+						"name": "pokemon_id",
+						"in": "path",
+						"required": true,
+						"description": "ID do Pokémon",
+						"schema": {
+							"type": "integer",
+							"example": 1
+						}
+					}
+				],
+				"tags": [
+					"pokemon"
+				],
+				"responses": {
+					"200": {
+						"description": "Detalhes do Pokémon",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Pokemon"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "API Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiError"
+								},
+								"examples": {
+									"InvalidPokemonId": {
+										"summary": "Invalid Pokemon Id",
+										"value": {
+											"message": "ApiError: Pokemon id should be greather than 0. Received: -39"
+										}
+									},
+									"NoAuthHeader": {
+										"summary": "Authorization header not provided",
+										"value": {
+											"message": "Authorization header must be provided"
+										}
+									},
+									"InvalidAuthToken": {
+										"summary": "Invalid Auth Token",
+										"value": {
+											"message": "Invalid auth token"
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiError"
+								},
+								"example": {
+									"message": "ApiError: Cannot find a pokemon with provided id. Received [id: 999999999999]"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/pokemons": {
+			"get": {
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"summary": "Get Pokemon List",
+				"tags": [
+					"pokemon"
+				],
+				"responses": {
+					"200": {
+						"description": "Pokemon List",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Pokemon"
+									}
+								},
+								"example": [
+									{
+										"pokemon_id": 1,
+										"name": "bulbasaur",
+										"height": 7,
+										"weight": 69,
+										"abilities": [
+											{
+												"name": "overgrow"
+											}
+										],
+										"moves": [
+											{
+												"name": "tackle"
+											}
+										],
+										"types": [
+											{
+												"name": "grass"
+											}
+										],
+										"stats": [
+											{
+												"name": "speed",
+												"base_stat": 45,
+												"effort": 1
+											}
+										]
+									}
+								]
+							}
+						}
+					},
+					"400": {
+						"description": "Client Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiError"
+								},
+								"examples": {
+									"NoAuthHeader": {
+										"summary": "Authorization header not provided",
+										"value": {
+											"message": "Authorization header must be provided"
+										}
+									},
+									"InvalidAuthToken": {
+										"summary": "Invalid Auth Token",
+										"value": {
+											"message": "Invalid auth token"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiError"
+								},
+								"example": {
+									"message": "API Validation error. Cannot process the request"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		},
+		"schemas": {
+			"CreateUserRequest": {
+				"type": "object",
+				"properties": {
+					"username": {
+						"type": "string",
+						"example": "John"
+					},
+					"age": {
+						"type": "integer",
+						"example": 30
+					},
+					"password": {
+						"type": "string",
+						"example": "1233"
+					}
+				},
+				"required": [
+					"username",
+					"age",
+					"password"
+				]
+			},
+			"CreateUserResponse": {
+				"type": "object",
+				"properties": {
+					"accessToken": {
+						"type": "string",
+						"description": "JWT access token",
+						"example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmYyZjg0MTAxMWJjYzMzNDc4Yjc5YmQiLCJpYXQiOjE3Mjc4MTYyMzQsImV4cCI6MTcyNzgxOTgzNH0.HhUFgVdgdTx0x-mRgNNUxu9cMUs8XMjLUJ-8eU-JlY8"
+					},
+					"refreshToken": {
+						"type": "string",
+						"description": "JWT refresh token",
+						"example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzNmODEyZDA0ZTAwNTg3OGZkOWNiOWUiLCJpYXQiOjE3MzIyMTUwODUsImV4cCI6MTc0Nzc2NzA4NX0.tstigcie2_fFN19bQwFapcPP9VuLl7UgOuGxbH49Lxg"
+					}
+				}
+			},
+			"EditUserRequest": {
+				"type": "object",
+				"properties": {
+					"userEdition": {
+						"type": "object",
+						"description": "object of properties of a user to be edited",
+						"properties": {
+							"username": {
+								"type": "string",
+								"description": "username to be edited",
+								"example": "Caio",
+								"nullable": true
+							},
+							"age": {
+								"type": "integer",
+								"description": "user age",
+								"example": 71,
+								"nullable": true
+							},
+							"pokemons": {
+								"type": "array",
+								"description": "user's Pokémon list",
+								"items": {
+									"$ref": "#/components/schemas/Pokemon"
+								},
+								"nullable": true
+							}
+						}
+					}
+				}
+			},
+			"EditUserResponse": {
+				"type": "object",
+				"properties": {
+					"userId": {
+						"type": "string",
+						"example": "66d62088031a2073b50d6d66"
+					},
+					"username": {
+						"type": "string",
+						"example": "Caio"
+					},
+					"age": {
+						"type": "integer",
+						"example": 71
+					},
+					"pokemons": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Pokemon"
+						}
+					}
+				}
+			},
+			"ChangePasswordResponse": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string",
+						"example": "Sucessfully changed password for user: 66d62088031a2073b50d6d66"
+					}
+				}
+			},
+			"NewAccessTokenResponse": {
+				"type": "object",
+				"properties": {
+					"newAccessToken": {
+						"type": "string",
+						"example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcklkIjoiNjZkNjIwODgwMzFhMjA3M2I1MGQ2ZDY2IiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.QT83p4Oy16ZYXxKR3b8aye-aI4apfSMq_d3IyR8MZX4"
+					}
+				}
+			},
+			"LoginResponse": {
+				"type": "object",
+				"properties": {
+					"accessToken": {
+						"type": "string",
+						"example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcklkIjoiNjZkNjIwODgwMzFhMjA3M2I1MGQ2ZDY2IiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.QT83p4Oy16ZYXxKR3b8aye-aI4apfSMq_d3IyR8MZX4"
+					},
+					"refreshToken": {
+						"type": "string",
+						"example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzNmODEyZDA0ZTAwNTg3OGZkOWNiOWUiLCJpYXQiOjE3MzIyMTUyNjQsImV4cCI6MTc0Nzc2NzI2NH0.NHEsIarSP2ZoWkGT-HyuNRp8-VcjDU_QIwKDlm9vbC8"
+					}
+				}
+			},
+			"ErrorResponse": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string",
+						"description": "Error message"
+					}
+				}
+			},
+			"Ability": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "The name of the ability.",
+						"example": "nice ability"
+					}
+				},
+				"required": [
+					"name"
+				]
+			},
+			"Move": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "The name of the move.",
+						"example": "thunder rush"
+					}
+				},
+				"required": [
+					"name"
+				]
+			},
+			"Type": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "The type of the Pokémon.",
+						"example": "electric"
+					}
+				},
+				"required": [
+					"name"
+				]
+			},
+			"Stat": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "The name of the stat.",
+						"example": "speed"
+					},
+					"base_stat": {
+						"type": "integer",
+						"description": "The base value of the stat.",
+						"example": 10
+					},
+					"effort": {
+						"type": "integer",
+						"description": "The effort value associated with the stat.",
+						"example": 10
+					}
+				},
+				"required": [
+					"name",
+					"base_stat",
+					"effort"
+				]
+			},
+			"Pokemon": {
+				"type": "object",
+				"properties": {
+					"pokemon_id": {
+						"type": "integer",
+						"description": "Unique identifier for the Pokémon.",
+						"example": 25
+					},
+					"name": {
+						"type": "string",
+						"description": "The name of the Pokémon.",
+						"example": "Pikachu"
+					},
+					"height": {
+						"type": "integer",
+						"description": "The height of the Pokémon.",
+						"example": 10
+					},
+					"weight": {
+						"type": "integer",
+						"description": "The weight of the Pokémon.",
+						"example": 10
+					},
+					"abilities": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Ability"
+						},
+						"description": "List of abilities that the Pokémon possesses."
+					},
+					"moves": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Move"
+						},
+						"description": "List of moves that the Pokémon can perform."
+					},
+					"types": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Type"
+						},
+						"description": "List of types associated with the Pokémon."
+					},
+					"stats": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Stat"
+						},
+						"description": "List of stats associated with the Pokémon."
+					}
+				},
+				"required": [
+					"pokemon_id",
+					"name",
+					"height",
+					"weight",
+					"abilities",
+					"moves",
+					"types",
+					"stats"
+				]
+			},
+			"SafeUser": {
+				"type": "object",
+				"properties": {
+					"userId": {
+						"type": "string",
+						"example": "66d62088031a2073b50d6d66"
+					},
+					"username": {
+						"type": "string",
+						"example": "Goku"
+					},
+					"age": {
+						"type": "integer",
+						"example": 30
+					},
+					"pokemons": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Pokemon"
+						}
+					}
+				}
+			},
+			"UserPokemonUpdateRequest": {
+				"type": "object",
+				"properties": {
+					"pokemons": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Pokemon"
+						},
+						"description": "List of Pokemons to be added"
+					}
+				},
+				"required": [
+					"pokemons"
+				]
+			},
+			"ApiError": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string",
+						"example": "ApiError: Pokemon id should be greather than 0. Received: -39"
+					}
+				}
+			},
+			"AuthorizationNotProvided": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string",
+						"example": "Authorization header must be provided"
+					}
+				}
+			},
+			"InvalidAuthToken": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string",
+						"example": "Authorization header must be provided"
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,322 @@
+{
+	"_id": "673b9f14c6551139dba2f433",
+	"username": "Goku",
+	"age": 30,
+	"password": "12345",
+	"pokemons": [
+		{
+			"pokemon_id": 1,
+			"name": "bulbasaur",
+			"height": 7,
+			"weight": 69,
+			"abilities": [
+				{
+					"name": "overgrow"
+				},
+				{
+					"name": "chlorophyll"
+				}
+			],
+			"moves": [
+				{
+					"name": "razor-wind"
+				},
+				{
+					"name": "swords-dance"
+				},
+				{
+					"name": "cut"
+				},
+				{
+					"name": "bind"
+				},
+				{
+					"name": "vine-whip"
+				},
+				{
+					"name": "headbutt"
+				},
+				{
+					"name": "tackle"
+				},
+				{
+					"name": "body-slam"
+				},
+				{
+					"name": "take-down"
+				},
+				{
+					"name": "double-edge"
+				},
+				{
+					"name": "growl"
+				},
+				{
+					"name": "strength"
+				},
+				{
+					"name": "mega-drain"
+				},
+				{
+					"name": "leech-seed"
+				},
+				{
+					"name": "growth"
+				},
+				{
+					"name": "razor-leaf"
+				},
+				{
+					"name": "solar-beam"
+				},
+				{
+					"name": "poison-powder"
+				},
+				{
+					"name": "sleep-powder"
+				},
+				{
+					"name": "petal-dance"
+				},
+				{
+					"name": "string-shot"
+				},
+				{
+					"name": "toxic"
+				},
+				{
+					"name": "rage"
+				},
+				{
+					"name": "mimic"
+				},
+				{
+					"name": "double-team"
+				},
+				{
+					"name": "defense-curl"
+				},
+				{
+					"name": "light-screen"
+				},
+				{
+					"name": "reflect"
+				},
+				{
+					"name": "bide"
+				},
+				{
+					"name": "sludge"
+				},
+				{
+					"name": "skull-bash"
+				},
+				{
+					"name": "amnesia"
+				},
+				{
+					"name": "flash"
+				},
+				{
+					"name": "rest"
+				},
+				{
+					"name": "substitute"
+				},
+				{
+					"name": "snore"
+				},
+				{
+					"name": "curse"
+				},
+				{
+					"name": "protect"
+				},
+				{
+					"name": "sludge-bomb"
+				},
+				{
+					"name": "mud-slap"
+				},
+				{
+					"name": "outrage"
+				},
+				{
+					"name": "giga-drain"
+				},
+				{
+					"name": "endure"
+				},
+				{
+					"name": "charm"
+				},
+				{
+					"name": "false-swipe"
+				},
+				{
+					"name": "swagger"
+				},
+				{
+					"name": "fury-cutter"
+				},
+				{
+					"name": "attract"
+				},
+				{
+					"name": "sleep-talk"
+				},
+				{
+					"name": "return"
+				},
+				{
+					"name": "frustration"
+				},
+				{
+					"name": "safeguard"
+				},
+				{
+					"name": "sweet-scent"
+				},
+				{
+					"name": "synthesis"
+				},
+				{
+					"name": "hidden-power"
+				},
+				{
+					"name": "sunny-day"
+				},
+				{
+					"name": "rock-smash"
+				},
+				{
+					"name": "facade"
+				},
+				{
+					"name": "nature-power"
+				},
+				{
+					"name": "helping-hand"
+				},
+				{
+					"name": "ingrain"
+				},
+				{
+					"name": "knock-off"
+				},
+				{
+					"name": "secret-power"
+				},
+				{
+					"name": "weather-ball"
+				},
+				{
+					"name": "grass-whistle"
+				},
+				{
+					"name": "bullet-seed"
+				},
+				{
+					"name": "magical-leaf"
+				},
+				{
+					"name": "natural-gift"
+				},
+				{
+					"name": "worry-seed"
+				},
+				{
+					"name": "seed-bomb"
+				},
+				{
+					"name": "energy-ball"
+				},
+				{
+					"name": "leaf-storm"
+				},
+				{
+					"name": "power-whip"
+				},
+				{
+					"name": "captivate"
+				},
+				{
+					"name": "grass-knot"
+				},
+				{
+					"name": "venoshock"
+				},
+				{
+					"name": "acid-spray"
+				},
+				{
+					"name": "round"
+				},
+				{
+					"name": "echoed-voice"
+				},
+				{
+					"name": "grass-pledge"
+				},
+				{
+					"name": "work-up"
+				},
+				{
+					"name": "grassy-terrain"
+				},
+				{
+					"name": "confide"
+				},
+				{
+					"name": "grassy-glide"
+				},
+				{
+					"name": "tera-blast"
+				},
+				{
+					"name": "trailblaze"
+				}
+			],
+			"types": [
+				{
+					"name": "grass"
+				},
+				{
+					"name": "poison"
+				}
+			],
+			"stats": [
+				{
+					"name": "hp",
+					"base_stat": 45,
+					"effort": 0
+				},
+				{
+					"name": "attack",
+					"base_stat": 49,
+					"effort": 0
+				},
+				{
+					"name": "defense",
+					"base_stat": 49,
+					"effort": 0
+				},
+				{
+					"name": "special-attack",
+					"base_stat": 65,
+					"effort": 1
+				},
+				{
+					"name": "special-defense",
+					"base_stat": 65,
+					"effort": 0
+				},
+				{
+					"name": "speed",
+					"base_stat": 45,
+					"effort": 0
+				}
+			]
+		}
+	]
+}

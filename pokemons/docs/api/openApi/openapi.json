@@ -1,0 +1,271 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Pokemon API",
+		"version": "1.0.0",
+		"description": "API get pokemon details"
+	},
+	"tags": [
+		{
+			"name": "pokemon"
+		},
+		{
+			"name": "healthcheck"
+		}
+	],
+	"servers": [
+		{
+			"url": "http://localhost:3001",
+			"description": "Servidor local"
+		}
+	],
+	"paths": {
+		"/pokemons/{pokemon_id}": {
+			"get": {
+				"summary": "Get A single specific pokemon by its id",
+				"parameters": [
+					{
+						"name": "pokemon_id",
+						"in": "path",
+						"required": true,
+						"description": "ID do Pokémon",
+						"schema": {
+							"type": "integer",
+							"example": 1
+						}
+					}
+				],
+				"tags": [
+					"pokemon"
+				],
+				"responses": {
+					"200": {
+						"description": "Pokemon",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Pokemon"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "APi Error - bad request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiError"
+								},
+								"example": {
+									"message": "ApiError: Pokemon id should be greather than 0. Received: -39"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "API Error - Pokemon Not found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiError"
+								},
+								"example": {
+									"message": "ApiError: Cannot find a pokemon with provided id. Received [id: 999999999999]"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/pokemons": {
+			"get": {
+				"summary": "Get Pokemon list",
+				"tags": [
+					"pokemon"
+				],
+				"responses": {
+					"200": {
+						"description": "Pokemon List",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Pokemon"
+									}
+								},
+								"example": [
+									{
+										"pokemon_id": 1,
+										"name": "bulbasaur",
+										"height": 7,
+										"weight": 69,
+										"abilities": [
+											{
+												"name": "overgrow"
+											}
+										],
+										"moves": [
+											{
+												"name": "tackle"
+											}
+										],
+										"types": [
+											{
+												"name": "grass"
+											}
+										],
+										"stats": [
+											{
+												"name": "speed",
+												"base_stat": 45,
+												"effort": 1
+											}
+										]
+									}
+								]
+							}
+						}
+					},
+					"500": {
+						"description": "Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiError"
+								},
+								"example": {
+									"message": "API Validation error. Cannot process the request"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/health": {
+			"get": {
+				"summary": "Verify the API Heath",
+				"tags": [
+					"healthcheck"
+				],
+				"responses": {
+					"200": {
+						"description": "API is working fine",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "string",
+									"example": "OK"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Ability": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"example": "overgrow"
+					}
+				}
+			},
+			"Move": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"example": "tackle"
+					}
+				}
+			},
+			"Type": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"example": "grass"
+					}
+				}
+			},
+			"Stat": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"example": "speed"
+					},
+					"base_stat": {
+						"type": "integer",
+						"example": 45
+					},
+					"effort": {
+						"type": "integer",
+						"example": 1
+					}
+				}
+			},
+			"Pokemon": {
+				"type": "object",
+				"properties": {
+					"pokemon_id": {
+						"type": "integer",
+						"example": 1
+					},
+					"name": {
+						"type": "string",
+						"example": "bulbasaur"
+					},
+					"height": {
+						"type": "integer",
+						"example": 7
+					},
+					"weight": {
+						"type": "integer",
+						"example": 69
+					},
+					"abilities": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Ability"
+						}
+					},
+					"moves": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Move"
+						}
+					},
+					"types": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Type"
+						}
+					},
+					"stats": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Stat"
+						}
+					}
+				}
+			},
+			"ApiError": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string",
+						"example": "ApiError: Pokemon id should be greather than 0. Received: -39"
+					}
+				}
+			}
+		}
+	}
+}

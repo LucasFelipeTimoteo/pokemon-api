@@ -1,0 +1,1971 @@
+{
+	"info": {
+		"_postman_id": "a204df6b-7e4b-4ff0-a4e8-745b495306a9",
+		"name": "API-Gateway",
+		"description": "API to manage API-Gateway.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36822624"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create a new user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"JohnDoe\",\n\t\"age\": 30,\n    \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Creates a new user with username and age."
+					},
+					"response": [
+						{
+							"name": "201 - Create a new user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"JohnDoe2\",\n\t\"age\": 30,\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "194"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c2-UIaPz7m9Vqn02nV1kuLpBnn0vss\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Oct 2024 13:13:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzNmODQ5MDA0ZTAwNTg3OGZkOWNiYjEiLCJpYXQiOjE3MzIyMTU5NTIsImV4cCI6MTczMjIxOTU1Mn0.l-Whrsj_v2zp2sKxcKl_V-wUNZbTQl1ZZA7JKygd-Fc\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzNmODQ5MDA0ZTAwNTg3OGZkOWNiYjEiLCJpYXQiOjE3MzIyMTU5NTIsImV4cCI6MTc0Nzc2Nzk1Mn0.YTMKiN7EATpznrqMIWlayZRW__CNLgyAjdZl1LbMUBs\"\n}"
+						},
+						{
+							"name": "400 - invalid unput",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"age\": 30,\r\n    \"password\": \"123456\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin, Accept-Encoding"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "81"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"51-zCIUtqGclQB+FJ1AHKOC5/5gelo\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Oct 2024 13:44:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid username. It must be a string, but received type: undefined\"\n}"
+						},
+						{
+							"name": "400 - username already exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"JohnDoe\",\n\t\"age\": 30,\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"ApiError: Invalid username. Username already exists\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit user data",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"userId\": \"673f849004e005878fd9cbb1\",\r\n    \"iat\": 1732215952\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "{{vault:accessTokenSecret}}",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userEdition\": {\n        \"username\": \"jonnyDoe\",\n        \"age\": 12\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Allows editing of specific properties of an existing user."
+					},
+					"response": [
+						{
+							"name": "200 - Successfully updated user",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userEdition\": {\n        \"username\": \"Ash\",\n        \"age\": 20\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								},
+								"description": "Allows editing of specific properties of an existing user."
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"Ash\",\n    \"age\": 20,\n    \"pokemons\": [],\n    \"userId\": \"66fe98882196cc6333471aab\"\n}"
+						},
+						{
+							"name": "400 - Validation error",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userEdition\": {\n        \"username\": \"Ash\",\n        \"age\": 0\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								},
+								"description": "Allows editing of specific properties of an existing user."
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid age. It must be a number greater than 6, but received: 0\"\n}"
+						},
+						{
+							"name": "404 - User not found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzNmODQ5MDA0ZTAwNTg3OGZkOWNiYjEiLCJpYXQiOjE3MzIyMTU5NTIsImV4cCI6MTczMjIxOTU1Mn0.l-Whrsj_v2zp2sKxcKl_V-wUNZbTQl1ZZA7JKygd-Fc",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userEdition\": {\n        \"username\": \"Ash\",\n        \"age\": 20\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								},
+								"description": "Allows editing of specific properties of an existing user."
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"ApiError: invalid userId. Cannot find a user with userId: 66f9c020845f2fbe86dcd4b0\"\n}"
+						}
+					]
+				},
+				{
+					"name": "appendPokemonToUser",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"userId\": \"673f849004e005878fd9cbb1\",\r\n    \"iat\": 1732215952\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "{{vault:accessTokenSecret}}",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"string\",\r\n    \"poekmons\": [\r\n        {}\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/pokemons",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"pokemons"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - appendPokemonToUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pokemons\": [\r\n        {\r\n            \"pokemon_id\": 3,\r\n            \"name\": \"bulbasaur\",\r\n            \"height\": 7,\r\n            \"weight\": 69,\r\n            \"moves\": [\r\n                {\r\n                    \"name\": \"test\"\r\n                }\r\n            ],\r\n            \"abilities\": [\r\n                {\r\n                    \"name\": \"test\"\r\n                }\r\n            ],\r\n            \"types\": [\r\n                {\r\n                    \"name\": \"grass\"\r\n                },\r\n                {\r\n                    \"name\": \"poison\"\r\n                }\r\n            ],\r\n            \"stats\": [\r\n                {\r\n                    \"name\": \"hp\",\r\n                    \"base_stat\": 45,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"attack\",\r\n                    \"base_stat\": 49,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"defense\",\r\n                    \"base_stat\": 49,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"special-attack\",\r\n                    \"base_stat\": 65,\r\n                    \"effort\": 1\r\n                },\r\n                {\r\n                    \"name\": \"special-defense\",\r\n                    \"base_stat\": 65,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"speed\",\r\n                    \"base_stat\": 45,\r\n                    \"effort\": 0\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/pokemons",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"pokemons"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"Ash\",\n    \"age\": 20,\n    \"pokemons\": [\n        {\n            \"pokemon_id\": 3,\n            \"name\": \"bulbasaur\",\n            \"height\": 7,\n            \"weight\": 69,\n            \"abilities\": [\n                {\n                    \"name\": \"test\"\n                }\n            ],\n            \"moves\": [\n                {\n                    \"name\": \"test\"\n                }\n            ],\n            \"types\": [\n                {\n                    \"name\": \"grass\"\n                },\n                {\n                    \"name\": \"poison\"\n                }\n            ],\n            \"stats\": [\n                {\n                    \"name\": \"hp\",\n                    \"base_stat\": 45,\n                    \"effort\": 0\n                },\n                {\n                    \"name\": \"attack\",\n                    \"base_stat\": 49,\n                    \"effort\": 0\n                },\n                {\n                    \"name\": \"defense\",\n                    \"base_stat\": 49,\n                    \"effort\": 0\n                },\n                {\n                    \"name\": \"special-attack\",\n                    \"base_stat\": 65,\n                    \"effort\": 1\n                },\n                {\n                    \"name\": \"special-defense\",\n                    \"base_stat\": 65,\n                    \"effort\": 0\n                },\n                {\n                    \"name\": \"speed\",\n                    \"base_stat\": 45,\n                    \"effort\": 0\n                }\n            ]\n        }\n    ],\n    \"userId\": \"66fe98882196cc6333471aab\"\n}"
+						},
+						{
+							"name": "400 - invalid input: invalid pokemon",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pokemons\": [\r\n        {\r\n            \"pokemon_id\": 3,\r\n            \"name\": \"bulbasaur\",\r\n            \"height\": 7,\r\n            \"weight\": 69,\r\n            \"moves\": [\r\n                {\r\n                    \"name\": 123\r\n                }\r\n            ],\r\n            \"abilities\": [\r\n                {\r\n                    \"name\": \"test\"\r\n                }\r\n            ],\r\n            \"types\": [\r\n                {\r\n                    \"name\": \"grass\"\r\n                },\r\n                {\r\n                    \"name\": \"poison\"\r\n                }\r\n            ],\r\n            \"stats\": [\r\n                {\r\n                    \"name\": \"hp\",\r\n                    \"base_stat\": 45,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"attack\",\r\n                    \"base_stat\": 49,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"defense\",\r\n                    \"base_stat\": 49,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"special-attack\",\r\n                    \"base_stat\": 65,\r\n                    \"effort\": 1\r\n                },\r\n                {\r\n                    \"name\": \"special-defense\",\r\n                    \"base_stat\": 65,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"speed\",\r\n                    \"base_stat\": 45,\r\n                    \"effort\": 0\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/pokemons",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"pokemons"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid move name. It must be a string, but received type: number\"\n}"
+						},
+						{
+							"name": "400 - invalid input: nonExistent userId",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pokemons\": [\r\n        {\r\n            \"pokemon_id\": 3,\r\n            \"name\": \"bulbasaur\",\r\n            \"height\": 7,\r\n            \"weight\": 69,\r\n            \"moves\": [\r\n                {\r\n                    \"name\": \"test\"\r\n                }\r\n            ],\r\n            \"abilities\": [\r\n                {\r\n                    \"name\": \"test\"\r\n                }\r\n            ],\r\n            \"types\": [\r\n                {\r\n                    \"name\": \"grass\"\r\n                },\r\n                {\r\n                    \"name\": \"poison\"\r\n                }\r\n            ],\r\n            \"stats\": [\r\n                {\r\n                    \"name\": \"hp\",\r\n                    \"base_stat\": 45,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"attack\",\r\n                    \"base_stat\": 49,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"defense\",\r\n                    \"base_stat\": 49,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"special-attack\",\r\n                    \"base_stat\": 65,\r\n                    \"effort\": 1\r\n                },\r\n                {\r\n                    \"name\": \"special-defense\",\r\n                    \"base_stat\": 65,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"speed\",\r\n                    \"base_stat\": 45,\r\n                    \"effort\": 0\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/pokemons",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"pokemons"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"ApiError: invalid userId. Cannot find an user with userId: 69fe98882196cc6333471aab\"\n}"
+						},
+						{
+							"name": "500 - invalid input: invalid userId",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pokemons\": [\r\n        {\r\n            \"pokemon_id\": 3,\r\n            \"name\": \"bulbasaur\",\r\n            \"height\": 7,\r\n            \"weight\": 69,\r\n            \"moves\": [\r\n                {\r\n                    \"name\":\"test\"\r\n                }\r\n            ],\r\n            \"abilities\": [\r\n                {\r\n                    \"name\": \"test\"\r\n                }\r\n            ],\r\n            \"types\": [\r\n                {\r\n                    \"name\": \"grass\"\r\n                },\r\n                {\r\n                    \"name\": \"poison\"\r\n                }\r\n            ],\r\n            \"stats\": [\r\n                {\r\n                    \"name\": \"hp\",\r\n                    \"base_stat\": 45,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"attack\",\r\n                    \"base_stat\": 49,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"defense\",\r\n                    \"base_stat\": 49,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"special-attack\",\r\n                    \"base_stat\": 65,\r\n                    \"effort\": 1\r\n                },\r\n                {\r\n                    \"name\": \"special-defense\",\r\n                    \"base_stat\": 65,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"speed\",\r\n                    \"base_stat\": 45,\r\n                    \"effort\": 0\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/pokemons",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"pokemons"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unexpected unknown error. Cannot process request\"\n}"
+						},
+						{
+							"name": "404 - user not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pokemons\": [\r\n        {\r\n            \"pokemon_id\": 3,\r\n            \"name\": \"bulbasaur\",\r\n            \"height\": 7,\r\n            \"weight\": 69,\r\n            \"moves\": [\r\n                {\r\n                    \"name\": \"test\"\r\n                }\r\n            ],\r\n            \"abilities\": [\r\n                {\r\n                    \"name\": \"test\"\r\n                }\r\n            ],\r\n            \"types\": [\r\n                {\r\n                    \"name\": \"grass\"\r\n                },\r\n                {\r\n                    \"name\": \"poison\"\r\n                }\r\n            ],\r\n            \"stats\": [\r\n                {\r\n                    \"name\": \"hp\",\r\n                    \"base_stat\": 45,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"attack\",\r\n                    \"base_stat\": 49,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"defense\",\r\n                    \"base_stat\": 49,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"special-attack\",\r\n                    \"base_stat\": 65,\r\n                    \"effort\": 1\r\n                },\r\n                {\r\n                    \"name\": \"special-defense\",\r\n                    \"base_stat\": 65,\r\n                    \"effort\": 0\r\n                },\r\n                {\r\n                    \"name\": \"speed\",\r\n                    \"base_stat\": 45,\r\n                    \"effort\": 0\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/pokemons",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"pokemons"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"ApiError: invalid userId. Cannot find an user with userId: 66fe98882196cc6333471aac\"\n}"
+						}
+					]
+				},
+				{
+					"name": "getUserPokemons",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"userId\": \"673f849004e005878fd9cbb1\",\r\n    \"iat\": 1732215952\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "{{vault:accessTokenSecret}}",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/pokemons",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"pokemons"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - getUserPokemons",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/pokemons",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"pokemons"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"pokemon_id\": 3,\n        \"name\": \"bulbasaur\",\n        \"height\": 7,\n        \"weight\": 69,\n        \"abilities\": [\n            {\n                \"name\": \"test\"\n            }\n        ],\n        \"moves\": [\n            {\n                \"name\": \"test\"\n            }\n        ],\n        \"types\": [\n            {\n                \"name\": \"grass\"\n            },\n            {\n                \"name\": \"poison\"\n            }\n        ],\n        \"stats\": [\n            {\n                \"name\": \"hp\",\n                \"base_stat\": 45,\n                \"effort\": 0\n            },\n            {\n                \"name\": \"attack\",\n                \"base_stat\": 49,\n                \"effort\": 0\n            },\n            {\n                \"name\": \"defense\",\n                \"base_stat\": 49,\n                \"effort\": 0\n            },\n            {\n                \"name\": \"special-attack\",\n                \"base_stat\": 65,\n                \"effort\": 1\n            },\n            {\n                \"name\": \"special-defense\",\n                \"base_stat\": 65,\n                \"effort\": 0\n            },\n            {\n                \"name\": \"speed\",\n                \"base_stat\": 45,\n                \"effort\": 0\n            }\n        ]\n    },\n    {\n        \"pokemon_id\": 3,\n        \"name\": \"bulbasaur\",\n        \"height\": 7,\n        \"weight\": 69,\n        \"abilities\": [\n            {\n                \"name\": \"test\"\n            }\n        ],\n        \"moves\": [\n            {\n                \"name\": \"test\"\n            }\n        ],\n        \"types\": [\n            {\n                \"name\": \"grass\"\n            },\n            {\n                \"name\": \"poison\"\n            }\n        ],\n        \"stats\": [\n            {\n                \"name\": \"hp\",\n                \"base_stat\": 45,\n                \"effort\": 0\n            },\n            {\n                \"name\": \"attack\",\n                \"base_stat\": 49,\n                \"effort\": 0\n            },\n            {\n                \"name\": \"defense\",\n                \"base_stat\": 49,\n                \"effort\": 0\n            },\n            {\n                \"name\": \"special-attack\",\n                \"base_stat\": 65,\n                \"effort\": 1\n            },\n            {\n                \"name\": \"special-defense\",\n                \"base_stat\": 65,\n                \"effort\": 0\n            },\n            {\n                \"name\": \"speed\",\n                \"base_stat\": 45,\n                \"effort\": 0\n            }\n        ]\n    },\n    {\n        \"pokemon_id\": 3,\n        \"name\": \"bulbasaur\",\n        \"height\": 7,\n        \"weight\": 69,\n        \"abilities\": [\n            {\n                \"name\": \"test\"\n            }\n        ],\n        \"moves\": [\n            {\n                \"name\": \"test\"\n            }\n        ],\n        \"types\": [\n            {\n                \"name\": \"grass\"\n            },\n            {\n                \"name\": \"poison\"\n            }\n        ],\n        \"stats\": [\n            {\n                \"name\": \"hp\",\n                \"base_stat\": 45,\n                \"effort\": 0\n            },\n            {\n                \"name\": \"attack\",\n                \"base_stat\": 49,\n                \"effort\": 0\n            },\n            {\n                \"name\": \"defense\",\n                \"base_stat\": 49,\n                \"effort\": 0\n            },\n            {\n                \"name\": \"special-attack\",\n                \"base_stat\": 65,\n                \"effort\": 1\n            },\n            {\n                \"name\": \"special-defense\",\n                \"base_stat\": 65,\n                \"effort\": 0\n            },\n            {\n                \"name\": \"speed\",\n                \"base_stat\": 45,\n                \"effort\": 0\n            }\n        ]\n    }\n]"
+						},
+						{
+							"name": "404 - user not dound",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/pokemons",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"pokemons"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"ApiError: Cannot find an user with provided userId: 86fe98882196cc6333471aab\"\n}"
+						}
+					]
+				},
+				{
+					"name": "deleteUserPokemon",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"userId\": \"673f849004e005878fd9cbb1\",\r\n    \"iat\": 1732215952\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "{{vault:accessTokenSecret}}",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/pokemons/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"pokemons",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - deleteUserPokemon",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/pokemons/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"pokemons",
+										"3"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"removedPokemonId\": 3\n}"
+						},
+						{
+							"name": "404 - user not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/pokemons/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"pokemons",
+										"3"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"ApiError: Cannot find an user with provided userId: 96fe98882196cc6333471aab\"\n}"
+						},
+						{
+							"name": "404 - pokemon not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/pokemons/19",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"pokemons",
+										"19"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"ApiError: Cannot find a pokemon with provided pokemonId: 19 in the user 66fe98882196cc6333471aab\"\n}"
+						}
+					]
+				},
+				{
+					"name": "editUserPassword",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"userId\": \"673f849004e005878fd9cbb1\",\r\n    \"iat\": 1732215952\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "{{vault:accessTokenSecret}}",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"currentPassword\": \"string\",\r\n  \"newPassword\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - editUserPassword",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"currentPassword\": \"123456\",\r\n  \"newPassword\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/password",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"password"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Sucessfully changed password for user: 66fe98882196cc6333471aab\"\n}"
+						},
+						{
+							"name": "400 - invalid request: invalid currentPassword",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"currentPassword\": \"invalid-password\",\r\n  \"newPassword\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/password",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"password"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"ApiError: Failed to change user password\"\n}"
+						},
+						{
+							"name": "404 - cannot find user",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"currentPassword\": \"123456\",\r\n  \"newPassword\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/password",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"password"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"ApiError: invalid userId. Cannot find an user with userId: 69fe98882196cc6333471aab\"\n}"
+						},
+						{
+							"name": "400 - invalid request: invalid newPassword",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"currentPassword\": \"invalid-password\",\r\n  \"newPassword\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/password",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"password"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid user password. It must not be empty, but received: \"\n}"
+						},
+						{
+							"name": "500 - invalid request: invalid userId",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"currentPassword\": \"invalid-123456\",\r\n  \"newPassword\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/password",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"password"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Unexpected unknown error. Cannot process request\"\n}"
+						}
+					]
+				},
+				{
+					"name": "refreshAccessToken",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"expiredToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmZlY2RjODc1NjY3NjNkNmY2ZjIwM2MiLCJpYXQiOjE3Mjc5NzQ4NTYsImV4cCI6MTcyNzk3ODQ1Nn0.O6r8Q8LzOxn24IMLmgRalYxdgpcdcmEya149ZVgRzkc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/token/refresh",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"token",
+								"refresh"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - refreshAccessToken",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"expiredToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzNmODA1MzA0ZTAwNTg3OGZkOWNiOWEiLCJpYXQiOjE3MzIyMTQ4NjcsImV4cCI6MTczMjIxODQ2N30.QXcMNBqzFByW0dW16u14BxqLUmjjrbGI1ja2EosI3Hk\",\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzNmODA1MzA0ZTAwNTg3OGZkOWNiOWEiLCJpYXQiOjE3MzIyMTQ4NjcsImV4cCI6MTc0Nzc2Njg2N30.mB2T8iyafQsNODVSXb80L8klJSwUYWiVWnC-OYhtoyM\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/token/refresh",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"token",
+										"refresh"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"newAccessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmZlY2RjODc1NjY3NjNkNmY2ZjIwM2MiLCJpYXQiOjE3Mjc5NzQ5MjMsImV4cCI6MTcyNzk3ODUyM30.Naq_Lipg3Qzu9T4zTqGGuQqwAyBZs7KLHmimLGDuY0Q\"\n}"
+						},
+						{
+							"name": "404 - token dont match any refresh token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"expiredToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmZlY2VjMTc1NjY3NjNkNmY2ZjIwM2UiLCJpYXQiOjE3Mjc5NzUxMDUsImV4cCI6MTcyNzk3ODcwNX0.tD0BL0kDwrRhlS8A8MVB4Ie7NGeNbEOBd8Nl1wBULdE\",\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzNmODA1MzA0ZTAwNTg3OGZkOWNiOWEiLCJpYXQiOjE3MzIyMTQ4NjcsImV4cCI6MTc0Nzc2Njg2N30.mB2T8iyafQsNODVSXb80L8klJSwUYWiVWnC-OYhtoyM\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/token/refresh",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"token",
+										"refresh"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"ApiError: Cannot generate new accessToken because a refreshToken for user [66fecec17566763d6f6f203e] does not exists\"\n}"
+						},
+						{
+							"name": "400 - invalid token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"expiredToken\": \"invalidToken\",\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzNmODA1MzA0ZTAwNTg3OGZkOWNiOWEiLCJpYXQiOjE3MzIyMTQ4NjcsImV4cCI6MTc0Nzc2Njg2N30.mB2T8iyafQsNODVSXb80L8klJSwUYWiVWnC-OYhtoyM\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/token/refresh",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"token",
+										"refresh"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid Token. Cannot be decoded\"\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"string\",\r\n    \"password\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"JohnDoe\",\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzNmODA1MzA0ZTAwNTg3OGZkOWNiOWEiLCJpYXQiOjE3MzIyMTQ4NjcsImV4cCI6MTczMjIxODQ2N30.QXcMNBqzFByW0dW16u14BxqLUmjjrbGI1ja2EosI3Hk\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzNmODA1MzA0ZTAwNTg3OGZkOWNiOWEiLCJpYXQiOjE3MzIyMTQ4NjcsImV4cCI6MTc0Nzc2Njg2N30.mB2T8iyafQsNODVSXb80L8klJSwUYWiVWnC-OYhtoyM\"\n}"
+						},
+						{
+							"name": "400 - invalid username",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"nonExistentuser\",\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"ApiError: Invalid username or password\"\n}"
+						},
+						{
+							"name": "400 - invalid password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"JohnDoe\",\r\n    \"password\": \"12345682uhjakliuhdqwbwd\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"ApiError: Invalid username or password\"\n}"
+						},
+						{
+							"name": "400 - invalid password: empty password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"JohnDoe\",\r\n    \"password\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid user password. It must not be empty, but received: \"\n}"
+						},
+						{
+							"name": "400 - invalid usernam: too short",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"12345682uhjakliuhdqwbwd\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid username. It must have at least 2 of legth, but received length: 0\"\n}"
+						},
+						{
+							"name": "400 - invalid usernam: too long",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssadasdaaaaaassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssadasdaaaaaassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssadasdaaaaaassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssadasdaaaaaassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssadasdaaaaaassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssadasdaaaaaa\",\r\n    \"password\": \"12345682uhjakliuhdqwbwd\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid username. It must have maximum 30 of legth, but received length: 810\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Operations related to user management"
+		},
+		{
+			"name": "Pokemons",
+			"item": [
+				{
+					"name": "Get One Pokemon by ID",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"userId\": \"673f849004e005878fd9cbb1\",\r\n    \"iat\": 1732215952\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "{{vault:accessTokenSecret}}",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pokemons/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pokemons",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pokemon List",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"userId\": \"673f849004e005878fd9cbb1\",\r\n    \"iat\": 1732215952\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "{{vault:accessTokenSecret}}",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/pokemons",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pokemons"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "health",
+			"item": [
+				{
+					"name": "health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/health",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "jwt",
+		"jwt": [
+			{
+				"key": "secret",
+				"value": "{{vault:accessTokenSecret}}",
+				"type": "string"
+			},
+			{
+				"key": "algorithm",
+				"value": "HS256",
+				"type": "string"
+			},
+			{
+				"key": "isSecretBase64Encoded",
+				"value": false,
+				"type": "boolean"
+			},
+			{
+				"key": "payload",
+				"value": "{}",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "headerPrefix",
+				"value": "Bearer",
+				"type": "string"
+			},
+			{
+				"key": "queryParamKey",
+				"value": "token",
+				"type": "string"
+			},
+			{
+				"key": "header",
+				"value": "{}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3003"
+		}
+	]
+}
