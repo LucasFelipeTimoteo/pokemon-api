@@ -1,0 +1,19 @@
+  services:
+    api-gateway:
+      container_name: api-gateway
+      image: api-gateway:${NODE_ENV}
+      build: 
+        target: ${NODE_ENV}
+        context: .
+      ports:
+        - ${APP_PORT}:${APP_PORT}
+      networks:
+        - pokemon-network
+
+      healthcheck:
+        test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:${APP_PORT}/health"]
+        start_period: "3s"
+        
+  networks:
+    pokemon-network:
+      name: pokemon-network

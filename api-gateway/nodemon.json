@@ -1,0 +1,14 @@
+{
+  "verbose": false,
+  "ignore": [
+    "*.test.*",
+    "*.spec.*",
+    "**/__tests__/**",
+    "**/__test__/**",
+    "**/fixtures/**",
+    "build"
+  ],
+  "execMap": {
+    "ts": "node -r sucrase/register"
+  }
+}
