@@ -38,5 +38,5 @@ jobs:
       run: cat .env.test > .env
 
     - name: Run tests
-      working-directory: ./users
+      working-directory: ./pokemons
       run: npm run test
