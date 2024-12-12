@@ -21,22 +21,29 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        # Configurar o cache para o diretório correto
-        cache-dependency-path: ./pokemons/package-lock.json
-
-    - name: Install dependencies
+    - name: Install dependencies for pokemons service
       working-directory: ./pokemons
       run: npm ci
-
-    - name: Build the project
+    - name: Build the project os pokemons service
       working-directory: ./pokemons
       run: npm run build
-
-    - name: Create env file
+    - name: Create .env file from pokemons service
       working-directory: ./pokemons
       run: cat .env.test > .env
-
-    - name: Run tests
+    - name: Run pokemons service tests
       working-directory: ./pokemons
       run: npm run test
+
+    - name: Install dependencies for api-gateway service
+      working-directory: ./api-gateway
+      run: npm ci
+    - name: Build the project os api-gateway service
+      working-directory: ./api-gateway
+      run: npm run build
+    - name: Create .env file from api-gateway service
+      working-directory: ./api-gateway
+      run: cat .env.test > .env
+    - name: Run api-gateway service tests
+      working-directory: ./api-gateway
+      run: npm run test
+
