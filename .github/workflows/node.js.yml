@@ -23,15 +23,19 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         # Configurar o cache para o diretório correto
-        cache-dependency-path: ./users/package-lock.json
+        cache-dependency-path: ./pokemons/package-lock.json
 
     - name: Install dependencies
-      working-directory: ./users
+      working-directory: ./pokemons
       run: npm ci
 
     - name: Build the project
-      working-directory: ./users
+      working-directory: ./pokemons
       run: npm run build
+
+    - name: Create env file
+      working-directory: ./pokemons
+      run: cat .env.test > .env
 
     - name: Run tests
       working-directory: ./users
