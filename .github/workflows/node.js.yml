@@ -42,8 +42,19 @@ jobs:
       run: npm run build
     - name: Create .env file from api-gateway service
       working-directory: ./api-gateway
-      run: cat .env.test > .env
-    - name: Run api-gateway service tests
-      working-directory: ./api-gateway
-      run: npm run test
 
+    - name: Install dependencies for users service
+      working-directory: ./users
+      run: npm ci
+    - name: Build the project os users service
+      working-directory: ./users
+      run: npm run build
+    - name: Create .env file from users service
+      working-directory: ./users
+      run: cat .env.test > .env
+    - name: Create .secrets.env file from users service
+      working-directory: ./users
+      run: cat secrets.env.test > secrets.env
+    - name: Run users service tests
+      working-directory: ./users
+      run: npm run test
