@@ -1,0 +1,42 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        # Configurar o cache para o diretório correto
+        cache-dependency-path: ./pokemons/package-lock.json
+
+    - name: Install dependencies
+      working-directory: ./pokemons
+      run: npm ci
+
+    - name: Build the project
+      working-directory: ./pokemons
+      run: npm run build
+
+    - name: Create env file
+      working-directory: ./pokemons
+      run: cat .env.test > .env
+
+    - name: Run tests
+      working-directory: ./pokemons
+      run: npm run test
