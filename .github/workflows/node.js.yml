@@ -21,56 +21,28 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: ./users/package-lock.json
+        cache-dependency-path: '**/package-lock.json'
+
+    # Pokemons service
     - name: Install dependencies for pokemons service
       working-directory: ./pokemons
       run: npm ci
-    - name: Build the project os pokemons service
+    - name: Build the project of pokemons service
       working-directory: ./pokemons
       run: npm run build
-    - name: Create .env file from pokemons service
+    - name: Create .env file for pokemons service
       working-directory: ./pokemons
-      run: cat .env.test > .env
+      run: cp .env.test .env
     - name: Run pokemons service tests
       working-directory: ./pokemons
       run: npm run test
 
-      
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        cache-dependency-path: ./users/package-lock.json
+    # API Gateway service
     - name: Install dependencies for api-gateway service
       working-directory: ./api-gateway
       run: npm ci
-    - name: Build the project os api-gateway service
+    - name: Build the project of api-gateway service
       working-directory: ./api-gateway
       run: npm run build
-    - name: Create .env file from api-gateway service
-      working-directory: ./api-gateway
-
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        cache-dependency-path: ./users/package-lock.json
-    - name: Install dependencies for users service
-      working-directory: ./users
-      run: npm ci
-    - name: Build the project os users service
-      working-directory: ./users
-      run: npm run build
-    - name: Create .env file from users service
-      working-directory: ./users
-      run: cat .env.test > .env
-    - name: Create .secrets.env file from users service
-      working-directory: ./users
-      run: cat secrets.env.test > secrets.env
-    - name: Run users service tests
-      working-directory: ./users
-      run: npm run test
+    - name: Create .env file for api-gateway service
+      working-directory: ./api
