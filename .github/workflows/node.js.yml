@@ -45,4 +45,25 @@ jobs:
       working-directory: ./api-gateway
       run: npm run build
     - name: Create .env file for api-gateway service
-      working-directory: ./api
+      working-directory: ./api-gateway
+      run: cp .env.test .env
+    - name: Run api-gateway service tests
+      working-directory: ./api-gateway
+      run: npm run test
+
+    # Users service
+    - name: Install dependencies for users service
+      working-directory: ./users
+      run: npm ci
+    - name: Build the project of users service
+      working-directory: ./users
+      run: npm run build
+    - name: Create .env file for users service
+      working-directory: ./users
+      run: cp .env.test .env
+    - name: Create .secrets.env file for users service
+      working-directory: ./users
+      run: cp secrets.env.test secrets.env
+    - name: Run users service tests
+      working-directory: ./users
+      run: npm run test
