@@ -16,11 +16,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: ./users/package-lock.json
     - name: Install dependencies for pokemons service
       working-directory: ./pokemons
       run: npm ci
@@ -34,6 +35,14 @@ jobs:
       working-directory: ./pokemons
       run: npm run test
 
+      
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: ./users/package-lock.json
     - name: Install dependencies for api-gateway service
       working-directory: ./api-gateway
       run: npm ci
@@ -43,6 +52,13 @@ jobs:
     - name: Create .env file from api-gateway service
       working-directory: ./api-gateway
 
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: ./users/package-lock.json
     - name: Install dependencies for users service
       working-directory: ./users
       run: npm ci
