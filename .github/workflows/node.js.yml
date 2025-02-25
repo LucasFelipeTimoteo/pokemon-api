@@ -1,0 +1,69 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+
+    # Pokemons service
+    - name: Install dependencies for pokemons service
+      working-directory: ./pokemons
+      run: npm ci
+    - name: Build the project of pokemons service
+      working-directory: ./pokemons
+      run: npm run build
+    - name: Create .env file for pokemons service
+      working-directory: ./pokemons
+      run: cp .env.test .env
+    - name: Run pokemons service tests
+      working-directory: ./pokemons
+      run: npm run test
+
+    # API Gateway service
+    - name: Install dependencies for api-gateway service
+      working-directory: ./api-gateway
+      run: npm ci
+    - name: Build the project of api-gateway service
+      working-directory: ./api-gateway
+      run: npm run build
+    - name: Create .env file for api-gateway service
+      working-directory: ./api-gateway
+      run: cp .env.test .env
+    - name: Run api-gateway service tests
+      working-directory: ./api-gateway
+      run: npm run test
+
+    # Users service
+    - name: Install dependencies for users service
+      working-directory: ./users
+      run: npm ci
+    - name: Build the project of users service
+      working-directory: ./users
+      run: npm run build
+    - name: Create .env file for users service
+      working-directory: ./users
+      run: cp .env.test .env
+    - name: Create .secrets.env file for users service
+      working-directory: ./users
+      run: cp secrets.env.test secrets.env
+    - name: Run users service tests
+      working-directory: ./users
+      run: npm run test
